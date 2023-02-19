@@ -36,6 +36,25 @@
     };
 
 
+
+    function addBook($pdo, $title, $author, $description, $image) {
+    	try {
+    		$sql = 'INSERT INTO Book_List (title, author, description, image) VALUES (:title, :author, :description, :image)';
+    		$statement = $pdo->prepare($sql);
+    		$statement->bindValue(':title', $title);
+    		$statement->bindValue(':author', $author);
+    		$statement->bindValue(':description', $description);
+    		$statement->bindValue(':image', $image);
+    		$statement->execute();
+    	}catch(Exception $e) {
+    		echo 'Message: '.$e->getMessage();
+    	};
+    	$pdo = null;
+    	$sql = null;
+    };
+
+
+
     function checkUsername($pdo, $username) {
     	try {
     		$sql = 'SELECT count(username) as rowCount FROM User_List where username=:username';

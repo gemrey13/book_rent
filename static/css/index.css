@@ -1,0 +1,20 @@
+body {
+	padding-top: 2em;
+}
+
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.nav-right {
+	display: flex;
+}
+
+.nav-item a{
+	margin-right: 2em;
+	font-size: 18px;
+	text-decoration: none;
+}

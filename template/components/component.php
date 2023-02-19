@@ -1,5 +1,0 @@
-<?php
-	function navBar(){
-		echo
-	}
-?>
