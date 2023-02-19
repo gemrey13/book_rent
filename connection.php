@@ -4,7 +4,7 @@
     // Default host and user
 
     $host = 'localhost';
-    $db = 'dll3B';
+    $db = 'book_rental';
     $user = 'root';
     $password = '';
     function connect($host,$db,$user,$password){
