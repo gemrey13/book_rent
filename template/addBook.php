@@ -36,7 +36,7 @@
 
   <!-- Image input -->
   <div class="form-outline mb-4">
-    <input type="file" name="image" id="image"><br>
+    <input type="file" name="Image" id="image" accept=".jpg, .jpeg, .png"><br>
     <label class="form-label" for="image">Select a Image</label>
   </div>
 

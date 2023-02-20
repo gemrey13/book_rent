@@ -14,31 +14,36 @@
 			echo '<script>alert("Added Succesfully")</script>';
 		};
 		unset($_POST['addUserBtn']);
-	} elseif (isset($_POST['addBookBtn'])) {
+	};
+
+	if (isset($_POST['addBookBtn'])) {
 		$title = $_POST['title'];
 		$author = $_POST['author'];
 		$description = $_POST['description'];
 		$categoryID = $_POST['options'];
 
-		if (JVB) {
-			// code...
-		}
-		// $target_dir = '../media/';
-		// $target_file = $target_dir.basename($_FILES['image']['name']);
-		
-		// $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-		// $check = getimagesize($_FILES["image"]["tmp_name"]);
+		if ($_FILES['Image']['error'] === 4) {
+			echo "<script> alert('Error code 4: No file uploaded');</script>";
+		}else{
+			$filename = $_FILES['Image']['name'];
+			$filesize = $_FILES['Image']['size'];
+			$tmpname = $_FILES['Image']['tmp_name'];
 
-		// if($check !== false) {
-		//     addBook($pdo, $title, $author, $description, $target_file, $categoryID);
- 		// 	move_uploaded_file($_FILES['image']['tmp_name'],$target_file);
- 		// 	if (move_uploaded_file($_FILES['image']['tmp_name'],$target_file)) {
- 		// 		echo '<script>alert("Upload success")</script>';
- 		// 	}
-		// 	echo '<script>alert("Book Publish Successfully")</script>';
-		//   } else {
-		//     echo '<script>alert("Error Publishing Book!!")</script>';
-		//   };
+			$validImageExtension = ['jpg', 'jpeg', 'png'];
+			$imageExtension = explode('.', $filename);
+			$imageExtension = strtolower(end($imageExtension));
+			if (!in_array($imageExtension, $validImageExtension)) {
+				echo "<script> alert('Image Does Not Exist');</script>";
+			}else if($filesize > 1000000){
+				echo "<script> alert('Image Size is too large');</script>";
+			}else{
+				$newImageName = uniqid();
+				$newImageName .= '.' .$imageExtension;
+				move_uploaded_file($tmpname, 'media/'.$newImageName);
+				addBook($pdo, $title, $author, $description, $newImageName, $categoryID);
+				echo '<script> alert("Book Added Succesfully")</script>';
+			}
+		};
 		
 	};
 
