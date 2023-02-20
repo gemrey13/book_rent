@@ -5,7 +5,7 @@
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$username = $_POST['username'];
-		$upass = $_POST['upass'];
+		$upass = password_hash($_POST['upass'], PASSWORD_DEFAULT);
 
 		if (checkUsername($pdo, $username) == True) {
 			echo '<script>alert("Username Already Exist!!")</script>';
@@ -59,13 +59,12 @@
 
 	function checkUser($pdo, $username, $upass) {
 		try {
-			$sql = 'SELECT * FROM User_List WHERE username=:username AND upass=:upass';
+			$sql = 'SELECT * FROM User_List WHERE username=?';
 			$statement = $pdo->prepare($sql);
-			$statement->bindValue(':username', $username);
-			$statement->bindValue(':upass', $upass);
-			$statement->execute();
+			$statement->execute([$username]);
+			$user = $statement->fetch();
 
-			if ($statement->rowCount() > 0) {
+			if ($user && password_verify($upass, $user['upass'])) {
 				session_start();
 				$_SESSION['logged_in'] = true;
 				$_SESSION['username'] = $username;

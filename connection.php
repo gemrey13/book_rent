@@ -1,8 +1,5 @@
 <?php
 
-    // Connection to the database dll3B
-    // Default host and user
-
     $host = 'localhost';
     $db = 'book_rental';
     $user = 'root';
