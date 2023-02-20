@@ -1,3 +1,16 @@
+<?php
+  include '../process/utils.php';
+
+  session_start();
+
+    // Check if the user is not logged in
+    if (isset($_SESSION['username'])) {
+        header('Location: index.php');
+        exit();
+    }
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +26,7 @@
 
   
     <main class="form-signin w-100 m-auto">
-        <form action="/" method="POST">
+        <form action="" method="POST">
             <h1 class="h3 mb-3 fw-normal">Login</h1>
             <div class="form-floating">
                 <input type="text" name="username" class="form-control top" id="floatingInput" placeholder="Username" required autofocus>
@@ -24,7 +37,7 @@
                 <label for="floatingInput">Password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit" name="loginBtn">Login</button>
             <p class="mt-5 mb-3 text-muted">&copy; All rights reserved 2023</p>
         </form>
     </main>

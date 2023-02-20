@@ -1,3 +1,15 @@
+<?php
+  include '../process/utils.php';
+
+  session_start();
+
+    // Check if the user is not logged in
+    if (!isset($_SESSION['username'])) {
+        header('Location: login.php');
+        exit();
+    }
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -16,7 +28,7 @@
             <div class="nav-item">
                 <a href="#">Home</a>
                 <a href="#">Categories</a>
-                <a href="#">Logout</a>
+                <a href="logout.php">Logout</a>
             </div>
             <div>
             <form>
@@ -26,5 +38,7 @@
             </div>
         </div>
     </nav>
+    <hr>
 
+    
 </body>

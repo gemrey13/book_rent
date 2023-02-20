@@ -44,9 +44,39 @@
 				echo '<script> alert("Book Added Succesfully")</script>';
 			}
 		};
-		
+		unset($_POST['addBookBtn']);
 	};
 
+	if (isset($_POST['loginBtn'])) {
+		$username = $_POST['username'];
+		$upass = $_POST['upass'];
+
+		checkUser($pdo, $username, $upass);
+
+	};
+
+
+
+	function checkUser($pdo, $username, $upass) {
+		try {
+			$sql = 'SELECT * FROM User_List WHERE username=:username AND upass=:upass';
+			$statement = $pdo->prepare($sql);
+			$statement->bindValue(':username', $username);
+			$statement->bindValue(':upass', $upass);
+			$statement->execute();
+
+			if ($statement->rowCount() > 0) {
+				session_start();
+				$_SESSION['logged_in'] = true;
+				$_SESSION['username'] = $username;
+				header('Location: index.php');
+			}else {
+				echo '<script> alert("Invalid username or password") </script>';
+			}
+		} catch (Exception $e) {
+			echo 'Message: '.$e->getMessage();
+		}
+	}
 
 	function addUser($pdo, $username, $firstname, $lastname, $upass) {
 		try {
@@ -64,7 +94,6 @@
         $sql = null;
     };
 
-   
 
 
     function addBook($pdo, $title, $author, $description, $image, $categoryID) {
@@ -83,10 +112,6 @@
     	$pdo = null;
     	$sql = null;
     };
-
-
-
-
 
 
     function showCategories($pdo) {
