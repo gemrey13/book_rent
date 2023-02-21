@@ -25,6 +25,10 @@ body {
     padding: 60px 68px 40px;
 }
 
+#login-form {
+    height: 60%;
+}
+
 .login__title {
     margin-bottom: 20px;
     font-size: 2.2rem;

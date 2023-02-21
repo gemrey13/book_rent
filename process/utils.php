@@ -58,6 +58,32 @@
 
 
 
+
+	function populateCategories($pdo) {
+		$sql = 'SELECT * FROM Categories';
+		$statement = $pdo->query($sql);
+		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+		foreach ($row as $r) {
+			echo '<h1 style="color:blue;">'.$r['name'].'</h1> '.getCategories($pdo, $r['categoryID']);
+		}
+	};
+
+	function getCategories($pdo, $categoryID) {
+		$sql = 'SELECT Categories.name, Book_List.* FROM Categories INNER JOIN Book_List ON Categories.categoryID = :categoryID AND Book_List.categoryID = :categoryID';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':categoryID', $categoryID);
+		$statement->execute();
+		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+		foreach ($row as $r) {
+			foreach ($r['image'] as $img) {
+				return '<img src="media/'.$img.'">';
+			};
+		}
+	}
+
+
 	function checkUser($pdo, $username, $upass) {
 		try {
 			$sql = 'SELECT * FROM User_List WHERE username=?';
@@ -76,6 +102,8 @@
 		} catch (Exception $e) {
 			echo 'Message: '.$e->getMessage();
 		}
+		$pdo = null;
+		$sql = null;
 	}
 
 	function addUser($pdo, $username, $firstname, $lastname, $upass) {
@@ -150,6 +178,8 @@
     	} catch (Exception $e) {
     		echo 'Caught Exception: ', $e->getMessage(), '\n';
     	}
+    	$pdo = null;
+    	$sql = null;
     };
 	
  ?>
