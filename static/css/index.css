@@ -1,12 +1,17 @@
 body {
-	padding-top: 2em;
+	padding: 0;
+	margin: 0;
+	font-family: "Nunito Sans";
 }
 
-
 nav {
+	padding-top: 2em;
+	padding-bottom: 2em;
+	border-bottom: solid black 1px;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	background-color: #000000;
 }
 
 .nav-right {
@@ -17,4 +22,92 @@ nav {
 	margin-right: 2em;
 	font-size: 18px;
 	text-decoration: none;
+	color: #FFFBEB;
+}
+
+a.navbar-brand {
+	color: #e50914 !important;
+	font-size: 44px;
+	font-weight: bold;
+	font-family: "Nunito Sans";
+}
+
+
+
+
+
+.gallery {
+  display: flex;
+  padding: 2px;
+  transition: 0.3s;
+  background: linear-gradient(0deg, rgba(50, 50, 50, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+}
+.gallery:hover .gallery__image {
+  filter: grayscale(1);
+}
+.gallery__column {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.gallery__link {
+  margin: 2px;
+  overflow: hidden;
+}
+.gallery__link:hover .gallery__image {
+  filter: grayscale(0);
+}
+.gallery__link:hover .gallery__caption {
+  opacity: 1;
+}
+.gallery__thumb {
+  position: relative;
+}
+.gallery__image {
+  display: block;
+  width: 100%;
+  transition: 0.3s;
+}
+.gallery__image:hover {
+  transform: scale(1.1);
+}
+.gallery__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 25px 15px 15px;
+  width: 100%;
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  color: white;
+  opacity: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+  transition: 0.3s;
+}
+
+
+
+footer {
+   background-color: #000000;
+   padding-top: 40px;
+   border-top: 8px solid #222;
+}
+
+footer ul {
+   list-style-type: none;
+}
+
+footer ul li {
+   color: #757575;
+   margin-bottom: 15px;
+}
+
+footer a {
+   text-decoration: none;
+   color: #757575;
+}
+
+footer a:hover {
+   color: #757575;
+   text-decoration: underline;
 }
