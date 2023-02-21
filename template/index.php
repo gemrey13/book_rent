@@ -28,17 +28,21 @@
 
 <body>
     <nav>
-        <a class="navbar-brand">Book Renter</a>
+        <a class="navbar-brand" >
+            <img src="../static/img/rebook.png" width="70" height="70" class="d-inline-block align-top" alt="Rebook logo" style="position: relative; left: 0.5em; top: 0em;">
+        ebook</a>
         <div class="nav-right">
             <div class="nav-item">
-                <a href="#">Home</a>
-                <a href="#">Categories</a>
+                <a href="index.php">Home</a>
+                <a href="categories.php">Categories</a>
                 <a href="logout.php">Logout</a>
             </div>
             <div>
-            <form>
-                <input type="text" name="title" placeholder="Search">
-                <button type="submit" name="searchBtn">search</button>
+            <form class="wrap">
+                <div class="search">
+                <input type="text" name="title" class="searchTerm" placeholder="Search">
+                <button type="submit" name="searchBtn" class="searchButton"><img src="../static/img/magnify.svg"></button>
+                </div>
             </form>
             </div>
         </div>

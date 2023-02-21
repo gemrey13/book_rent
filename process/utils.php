@@ -42,6 +42,7 @@
 				move_uploaded_file($tmpname, 'media/'.$newImageName);
 				addBook($pdo, $title, $author, $description, $newImageName, $categoryID);
 				echo '<script> alert("Book Added Succesfully")</script>';
+				header('Location: index.php');
 			}
 		};
 		unset($_POST['addBookBtn']);

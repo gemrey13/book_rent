@@ -1,4 +1,4 @@
-<?php
+x<?php
   include '../process/utils.php';
 
   session_start();
@@ -24,9 +24,11 @@
 
 
   <body>
-    <nav class="navbar navbar-light p-0">
+    <nav class="navbar navbar-light p-0" style="position: fixed;">
       <div class="container-fluid px-5">
-        <a class="navbar-brand">Book Rental</a>
+        <a class="navbar-brand">
+          <img src="../static/img/rebook.png" width="70" height="70" class="d-inline-block align-top" alt="Rebook logo" style="position: relative; left: 0.5em; top: 0em;">
+        ebook</a>
         <div class="d-flex">
           <a href="login.php" class="btn-danger btn top-sign-in" style="background-color: Blue; margin-right: 2em;">Login</a>
           <a href="sign-up.php" class="btn-danger btn top-sign-in">Register</a>
