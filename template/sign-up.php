@@ -21,30 +21,34 @@
 </head>
 
 <body class="text-center">
-    <main class="form-signin w-100 m-auto">
+    <div class="login">
         <form action="login.php" method="POST">
 
-            <h1 class="h3 mb-3 fw-normal">Create new account</h1>
-            <div class="form-floating">
-                <input type="text" name="firstname" class="form-control bottom" id="floatingInput" placeholder="First Name" required>
-                <label for="floatingInput">First Name</label>
+            <h1 class="login__title">Create new account</h1>
+            <div class="login__group">
+                <input type="text" name="firstname" class="login__group__input" id="floatingInput" placeholder="First Name" required>
+                <label for="floatingInput" class="login__group__label">First Name</label>
             </div>
-            <div class="form-floating">
-                <input type="text" name="lastname" class="form-control bottom" id="floatingInput" placeholder="Last Name" required>
-                <label for="floatingInput">Last Name</label>
+
+            <div class="login__group">
+                <input type="text" name="lastname" class="login__group__input" id="floatingInput" placeholder="Last Name" required>
+                <label for="floatingInput" class="login__group__label">Last Name</label>
             </div>
-            <div class="form-floating">
-                <input type="text" name="username" class="form-control bottom" id="floatingInput" placeholder="Username" required>
-                <label for="floatingInput">Username</label>
+
+            <div class="login__group">
+                <input type="text" name="username" class="login__group__input" id="floatingInput" placeholder="Username" required>
+                <label for="floatingInput" class="login__group__label">Username</label>
             </div>
-            <div class="form-floating">
-                <input type="password" name="upass" class="form-control bottom" id="floatingInput" placeholder="Password" required>
-                <label for="floatingInput">Password</label>
+
+            <div class="login__group">
+                <input type="password" name="upass" class="login__group__input" id="floatingInput" placeholder="Password" required>
+                <label for="floatingInput" class="login__group__label">Password</label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit" name="addUserBtn">Signup</button>
-            <p class="mt-5 mb-3 text-muted">&copy; All rights reserved 2023</p>
+
+            <button class="login__sign-in" type="submit" name="addUserBtn">Signup</button>
+            <p style="text-align: center; color: white;">&copy; All rights reserved 2023</p>
         </form>
-    </main>
+    </div>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-x<?php
+<?php
   include '../process/utils.php';
 
   session_start();

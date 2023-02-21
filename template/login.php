@@ -22,25 +22,27 @@
     <link href="../static/css/styles.css" rel="stylesheet">
 </head>
 
-<body class="text-center">
+<body class="text-left">
 
-  
-    <main class="form-signin w-100 m-auto">
-        <form action="" method="POST">
-            <h1 class="h3 mb-3 fw-normal">Login</h1>
-            <div class="form-floating">
-                <input type="text" name="username" class="form-control top" id="floatingInput" placeholder="Username" required autofocus>
-                <label for="floatingInput">Username</label>
-            </div>
-            <div class="form-floating">
-                <input type="password" name="upass" class="form-control bottom" id="floatingInput" placeholder="Password" required>
-                <label for="floatingInput">Password</label>
+        <div class="login">
+        <form action="" method="POST" >
+
+            <h1 class="login__title">Login</h1>
+
+            <div class="login__group">
+                <input type="text" name="username" class="login__group__input" id="floatingInput"  required autofocus placeholder="A , a , 1 , - , _">
+                <label for="floatingInput" class="login__group__label">Username</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit" name="loginBtn">Login</button>
-            <p class="mt-5 mb-3 text-muted">&copy; All rights reserved 2023</p>
+            <div class="login__group">
+                <input type="password" name="upass" class="login__group__input" id="floatingInput" required placeholder="A , a , 1 , - , _">
+                <label for="floatingInput" class="login__group__label">Password</label>
+            </div>
+
+            <button class="login__sign-in" type="submit" name="loginBtn">Login</button>
+            <p style="text-align: center; color:white;">&copy; All rights reserved 2023</p>
         </form>
-    </main>
+    </div>
 </body>
 
 </html>
