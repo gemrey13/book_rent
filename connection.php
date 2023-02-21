@@ -1,7 +1,7 @@
 <?php
 
     $host = 'localhost';
-    $db = 'book_rental';
+    $db = 'Rebook';
     $user = 'root';
     $password = '';
     function connect($host,$db,$user,$password){
