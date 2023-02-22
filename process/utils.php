@@ -62,26 +62,30 @@
 	function populateCategories($pdo) {
 		$sql = 'SELECT * FROM Categories';
 		$statement = $pdo->query($sql);
-		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
+		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-		foreach ($row as $r) {
-			echo '<h1 style="color:blue;">'.$r['name'].'</h1> '.getCategories($pdo, $r['categoryID']);
+		foreach ($rows as $row) {
+			echo '
+			<h1 style="color:blue;">'.$row['name'].'</h1>
+			<div id="slider" style="background: url(media/default-image.png)">
+				<ul id="slideWrap">';
+					$categoryID = $row['categoryID'];
+					$imgSql = "SELECT  * FROM Book_List WHERE categoryID = $categoryID";
+					$imgStatement = $pdo->query($imgSql);
+					$images = $imgStatement->fetchAll(PDO::FETCH_ASSOC);
+					foreach ($images as $image) {
+						echo '</li><li><img src="media/'.$image['image'].'" width="300"></li>';
+					}
+
+			echo '
+				</ul>
+		    	<a id="prev" href="#">&#8810;</a>
+		    	<a id="next" href="#">&#8811;</a>
+			</div>';
 		}
 	};
 
-	function getCategories($pdo, $categoryID) {
-		$sql = 'SELECT Categories.name, Book_List.* FROM Categories INNER JOIN Book_List ON Categories.categoryID = :categoryID AND Book_List.categoryID = :categoryID';
-		$statement = $pdo->prepare($sql);
-		$statement->bindValue(':categoryID', $categoryID);
-		$statement->execute();
-		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-		foreach ($row as $r) {
-			foreach ($r['image'] as $img) {
-				return '<img src="media/'.$img.'">';
-			};
-		}
-	}
+	
 
 
 	function checkUser($pdo, $username, $upass) {
