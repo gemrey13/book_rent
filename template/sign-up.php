@@ -2,9 +2,8 @@
   include '../process/utils.php';
   session_start();
 
-    // Check if the user is not logged in
     if (isset($_SESSION['username'])) {
-        header('Location: index.php');
+        header('Location: blog.php');
         exit();
     }
 ?>
@@ -21,7 +20,10 @@
     <link rel="icon" href="../static/img/rebook.png">
 </head>
 
+
+
 <body class="text-center">
+
     <div class="login">
         <form action="login.php" method="POST">
 
@@ -50,6 +52,7 @@
             <p style="text-align: center; color: white;">&copy; All rights reserved 2023</p>
         </form>
     </div>
-</body>
 
+    
+</body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 	$pdo = require '../connection.php';
 
+
 	if (isset($_POST['addUserBtn'])) {
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
@@ -16,6 +17,8 @@
 		unset($_POST['addUserBtn']);
 	};
 
+
+
 	if (isset($_POST['addBookBtn'])) {
 		$title = $_POST['title'];
 		$author = $_POST['author'];
@@ -24,7 +27,7 @@
 
 		if ($_FILES['Image']['error'] === 4) {
 			echo "<script> alert('Error code 4: No file uploaded');</script>";
-		}else{
+		} else {
 			$filename = $_FILES['Image']['name'];
 			$filesize = $_FILES['Image']['size'];
 			$tmpname = $_FILES['Image']['tmp_name'];
@@ -42,50 +45,72 @@
 				move_uploaded_file($tmpname, 'media/'.$newImageName);
 				addBook($pdo, $title, $author, $description, $newImageName, $categoryID);
 				echo '<script> alert("Book Added Succesfully")</script>';
-				header('Location: index.php');
+				header('Location: blog.php');
 			}
 		};
 		unset($_POST['addBookBtn']);
 	};
+
+
 
 	if (isset($_POST['loginBtn'])) {
 		$username = $_POST['username'];
 		$upass = $_POST['upass'];
 
 		checkUser($pdo, $username, $upass);
-
 	};
 
 
 
 
-	function populateCategories($pdo) {
-		$sql = 'SELECT * FROM Categories';
+
+
+	function blog($pdo) {
+		$sql = 'SELECT * FROM Book_List';
 		$statement = $pdo->query($sql);
 		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-		foreach ($rows as $row) {
-			echo '
-			<h1 style="color:blue;">'.$row['name'].'</h1>
-			<div id="slider" style="background: url(media/default-image.png)">
-				<ul id="slideWrap">';
-					$categoryID = $row['categoryID'];
-					$imgSql = "SELECT  * FROM Book_List WHERE categoryID = $categoryID";
-					$imgStatement = $pdo->query($imgSql);
-					$images = $imgStatement->fetchAll(PDO::FETCH_ASSOC);
-					foreach ($images as $image) {
-						echo '</li><li><img src="media/'.$image['image'].'" width="300"></li>';
-					}
+		if ($rows < 0) {
+			echo '	
+			<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>
+			<h1 style="color:red; text-align:center; margin-top:5em;">No Posts</h1>
+			<h1 style="color:red; text-align:center; margin-top:2em;  margin-bottom:20%;">Posts a Blog to view</h1>';
+		} else {
+			echo '<h2>Posts</h2>
+			<a href="addBook.php" class="blog-post_cta" id="addPost">Add Post</a>';
 
-			echo '
-				</ul>
-		    	<a id="prev" href="#">&#8810;</a>
-		    	<a id="next" href="#">&#8811;</a>
-			</div>';
+			foreach ($rows as $row) {
+				echo '
+				<div class="container">
+					<div class="blog-post">
+						<div class="blog-post_img">
+							<img src="media/'.$row['image'].'" alt="">
+						</div>
+
+						<div class="blog-post_info">
+							<div class="blog-post_date">
+								<span>'.$row['author'].'</span>
+								<span>Nov 12 2021</span>
+							</div>
+							<h1 class="blog-post_title">'.$row['title'].'</h1>
+							<p class="blog-post_text">'.$row['description'].'
+							</p>
+							<a href="#" class="blog-post_cta">Read More</a>
+						</div>
+					</div>
+				</div>
+
+				';
+			}
 		}
+		$pdo = null;
+		$sql = null;
 	};
 
-	
+
+
+
+
 
 
 	function checkUser($pdo, $username, $upass) {
@@ -110,6 +135,11 @@
 		$sql = null;
 	}
 
+
+
+
+
+
 	function addUser($pdo, $username, $firstname, $lastname, $upass) {
 		try {
 			$sql = 'INSERT INTO User_List (username, firstname, lastname, upass) VALUES (:username, :firstname, :lastname, :upass)';
@@ -125,6 +155,10 @@
         $pdo = null;
         $sql = null;
     };
+
+
+
+
 
 
 
@@ -186,4 +220,7 @@
     	$sql = null;
     };
 	
+
+
+
  ?>
