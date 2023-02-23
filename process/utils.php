@@ -6,13 +6,19 @@
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
 		$username = $_POST['username'];
-		$upass = password_hash($_POST['upass'], PASSWORD_DEFAULT);
+		$upass1 = $_POST['upass1'];
+		$upass2 = $_POST['upass2'];
 
 		if (checkUsername($pdo, $username) == True) {
 			echo '<script>alert("Username Already Exist!!")</script>';
-		} else {
+		} else if($upass1 === $upass2) {
+			$upass = password_hash($_POST['upass1'], PASSWORD_DEFAULT);
 			addUser($pdo, $username, $firstname, $lastname, $upass);
-			echo '<script>alert("Added Succesfully")</script>';
+			echo '<script>alert("Register Succesfully")</script>';
+		}
+		else {
+			echo '<script>alert("Password does not match")</script>';
+			echo '<script>window.location.assign("../template/sign-up.php")</script>';
 		};
 		unset($_POST['addUserBtn']);
 	};

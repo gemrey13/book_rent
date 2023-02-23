@@ -35,14 +35,31 @@
             </div>
 
             <div class="login__group">
-                <input type="password" name="upass" class="login__group__input" id="floatingInput" required placeholder="A , a , 1 , - , _">
+                <input type="password" name="upass" class="login__group__input password" id="floatingInput" required placeholder="A , a , 1 , - , _">
                 <label for="floatingInput" class="login__group__label">Password</label>
+                
             </div>
-
+               <input type="checkbox" class="check"  onclick="showPass()" style="width:13px;height:13px;margin: 0 5px;"><span style="color:white;">Show Password</span>
             <button class="login__sign-in" type="submit" name="loginBtn">Login</button>
-            <p style="text-align: center; color:white;">&copy; All rights reserved 2023</p>
+
+            <p style="color:white; margin: auto;">Need an acoount? Click <a href="sign-up.php">Here</a></p>
+            <p style="text-align: center; color:white; margin-top: 2em;">&copy; All rights reserved 2023</p>
         </form>
     </div>
 </body>
+
+<script type="text/javascript">
+     function showPass() {
+         let box = document.querySelector('.password')
+         if (box.type === 'password') {
+            box.type = 'text';
+         }else {
+            box.type = 'password';
+         }
+     }
+
+
+</script>
+
 
 </html>

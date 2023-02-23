@@ -24,7 +24,7 @@
 
 <body class="text-center">
 
-    <div class="login">
+    <div class="login" style="height: 90%;">
         <form action="login.php" method="POST">
 
             <h1 class="login__title">Create new account</h1>
@@ -44,15 +44,42 @@
             </div>
 
             <div class="login__group">
-                <input type="password" name="upass" class="login__group__input" id="floatingInput" placeholder="Password" required>
+                <input type="password" name="upass1" class="login__group__input password1" id="floatingInput" placeholder="Password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{2,}" title="Must contain at  and one uppercase and lowercase letter, and at least 8 or more characters">
                 <label for="floatingInput" class="login__group__label">Password</label>
             </div>
+            <div class="login__group">
+                <input type="password" name="upass2" class="login__group__input password2" id="floatingInput" placeholder="Password" required>
+                <label for="floatingInput" class="login__group__label">Password</label>
+            </div>
+               <input type="checkbox" class="check"  onclick="showPass()" style="width:13px;height:13px;margin: 0 5px;"><span style="color:white;">Show Password</span>
 
             <button class="login__sign-in" type="submit" name="addUserBtn">Signup</button>
+
+            <p style="color:white; margin: auto;">Have an acoount? Click <a href="login.php"> Here</a></p>
             <p style="text-align: center; color: white;">&copy; All rights reserved 2023</p>
         </form>
     </div>
 
     
 </body>
+
+
+
+
+<script type="text/javascript">
+     function showPass() {
+         let box1 = document.querySelector('.password1')
+         let box2 = document.querySelector('.password2')
+         if (box1.type === 'password') {
+            box1.type = 'text';
+            box2.type = 'text';
+
+         }else {
+            box1.type = 'password';
+            box2.type = 'password';
+         }
+     }
+
+
+</script>
 </html>
