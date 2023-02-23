@@ -162,3 +162,15 @@ h2 {
         margin-left: 142px;
     }
 }
+
+.noResult {
+    text-align: center;
+    font-size: 15em;
+    margin: 1em 0 1.5em;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%; /* adjust as needed */
+}

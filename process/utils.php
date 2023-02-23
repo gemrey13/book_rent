@@ -66,22 +66,61 @@
 
 
 
+	function searchQuery($pdo, $searchTitle){
+		$pattern = '%'.$searchTitle.'%';
+		$sql = 'SELECT * FROM Book_List WHERE title LIKE :pattern OR author LIKE :pattern ORDER BY Book_List.bookID DESC';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':pattern', $pattern);
+		$statement->execute();
+		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-	function saveFile($tmpname, $newImageName) {
-		
+		if (count($rows) <= 0) {
+			echo '<h1 class="noResult">No Result</h1>';
+			echo '<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>';
+		}else{
+			echo '<a href="addBook.php" class="blog-post_cta" id="addPost">Add Post</a>';
+			foreach ($rows as $row) {
+				echo '
+						<div class="container">
+							<div class="blog-post">
+								<div class="blog-post_img">
+									<img src="media/'.$row['image'].'" alt="">
+								</div>
+
+								<div class="blog-post_info">
+									<div class="blog-post_date">
+										<span>'.$row['author'].'</span>
+										<span>'.$row['date_posted'].'</span>
+									</div>
+									<h1 class="blog-post_title">'.$row['title'].'</h1>
+									<p class="blog-post_text">'.$row['description'].'
+									</p>
+									<a href="#" class="blog-post_cta">Read More</a>
+								</div>
+							</div>
+						</div>
+
+						';
+			}
+		}
+        $pdo = null;
+        $sql = null;
+            
 	}
 
 
 
+
+
+
 	function blog($pdo) {
-		$sql = 'SELECT * FROM Book_List';
+		$sql = 'SELECT * FROM Book_List ORDER BY Book_List.bookID DESC';
 		$statement = $pdo->query($sql);
 		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 		if ($rows < 0) {
 			echo '
 			<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>
-			<h1 style="color:red; text-align:center; margin-top:5em;">No Posts</h1>
 			<h1 style="color:red; text-align:center; margin-top:2em;  margin-bottom:20%;">Posts a Blog to view</h1>';
 		} else {
 			echo '<h2>Posts</h2>
@@ -98,7 +137,7 @@
 						<div class="blog-post_info">
 							<div class="blog-post_date">
 								<span>'.$row['author'].'</span>
-								<span>Nov 12 2021</span>
+								<span>'.$row['date_posted'].'</span>
 							</div>
 							<h1 class="blog-post_title">'.$row['title'].'</h1>
 							<p class="blog-post_text">'.$row['description'].'

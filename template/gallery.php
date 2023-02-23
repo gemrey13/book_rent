@@ -37,9 +37,9 @@
                 <a href="logout.php">Logout</a>
             </div>
             <div>
-            <form class="wrap">
+            <form class="wrap" method="GET">
                 <div class="search">
-                <input type="text" name="title" class="searchTerm" placeholder="Search">
+                <input type="text" name="searchTitle" class="searchTerm" placeholder="Search">
                 <button type="submit" name="searchBtn" class="searchButton"><img src="../static/img/magnify.svg"></button>
                 </div>
             </form>
@@ -148,6 +148,13 @@
     </div>
 
 
+
+
+    <?php
+    if(isset($_GET['searchBtn'])) {
+      searchQuery($pdo, $_GET['searchTitle']);
+    }
+    ?>
 
 
     <footer>
