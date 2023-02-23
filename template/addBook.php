@@ -25,7 +25,7 @@
 
 
   <div style="width:50%;margin: auto;">
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="#" method="POST" enctype="multipart/form-data">
 
       <!-- Title input -->
       <div class="form-outline mb-4">

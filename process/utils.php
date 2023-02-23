@@ -42,7 +42,10 @@
 			}else{
 				$newImageName = uniqid();
 				$newImageName .= '.' .$imageExtension;
+				$imageName = $_FILES['Image'];
 				move_uploaded_file($tmpname, 'media/'.$newImageName);
+				echo 'Image: ' .$newImageName;
+				echo '<script> alert("Image Move Succesfully")</script>';
 				addBook($pdo, $title, $author, $description, $newImageName, $categoryID);
 				echo '<script> alert("Book Added Succesfully")</script>';
 				header('Location: blog.php');
@@ -64,6 +67,11 @@
 
 
 
+	function saveFile($tmpname, $newImageName) {
+		
+	}
+
+
 
 	function blog($pdo) {
 		$sql = 'SELECT * FROM Book_List';
@@ -71,7 +79,7 @@
 		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 		if ($rows < 0) {
-			echo '	
+			echo '
 			<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>
 			<h1 style="color:red; text-align:center; margin-top:5em;">No Posts</h1>
 			<h1 style="color:red; text-align:center; margin-top:2em;  margin-bottom:20%;">Posts a Blog to view</h1>';
@@ -178,6 +186,9 @@
     	$pdo = null;
     	$sql = null;
     };
+
+
+
 
 
     function showCategories($pdo) {
