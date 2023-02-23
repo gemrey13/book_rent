@@ -57,21 +57,21 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/_cvwXhGqG-o/300x300" alt="Portrait by Jessica Felicio" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Jessica Felicio" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Jessica Felicio</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/AHBvAIVqk64/300x500" alt="Portrait by Oladimeji Odunsi" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" alt="Portrait by Oladimeji Odunsi" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Oladimeji Odunsi</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/VLPLo-GtrIE/300x300" alt="Portrait by Alex Perez" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Alex Perez" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Alex Perez</figcaption>
                 </figure>
             </a>
@@ -80,21 +80,21 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/AR7aumwKr2s/300x300" alt="Portrait by Noah Buscher" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;"  alt="Portrait by Noah Buscher" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Noah Buscher</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/dnL6ZIpht2s/300x300" alt="Portrait by Ivana Cajina" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Ivana Cajina" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Ivana Cajina</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/tV_1sC603zA/300x500" alt="Portrait by Sam Burriss" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;"  alt="Portrait by Sam Burriss" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Sam Burriss</figcaption>
                 </figure>
             </a>
@@ -103,21 +103,21 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/Xm9-vA_bhm0/300x500" alt="Portrait by Mari Lezhava" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" alt="Portrait by Mari Lezhava" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Mari Lezhava</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/NTjSR3zYpsY/300x300" alt="Portrait by Ethan Haddox" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Ethan Haddox" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Ethan Haddox</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/2JH8d3ChNec/300x300" alt="Portrait by Amir Geshani" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Amir Geshani" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Amir Geshani</figcaption>
                 </figure>
             </a>
@@ -126,21 +126,21 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/FQhLLehm4dk/300x300" alt="Portrait by Guilian Fremaux" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Guilian Fremaux" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Guilian Fremaux</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/OQd9zONSx7s/300x300" alt="Portrait by Jasmin Chew" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Jasmin Chew" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Jasmin Chew</figcaption>
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="https://source.unsplash.com/XZkEhowjx8k/300x500" alt="Portrait by Dima DallAcqua" class="gallery__image">
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" alt="Portrait by Dima DallAcqua" class="gallery__image">
                     <figcaption class="gallery__caption">Portrait by Dima DallAcqua</figcaption>
                 </figure>
             </a>

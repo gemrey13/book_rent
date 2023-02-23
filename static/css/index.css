@@ -2,7 +2,10 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: "Nunito Sans";
+  background-color: #eee;
+  background-image: url(../img/bg-blog.jpg);
 }
+
 
 nav {
 	padding-top: 2em;
@@ -111,6 +114,13 @@ a.navbar-brand {
   opacity: 0;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
   transition: 0.3s;
+}
+
+
+.form-add-book {
+  width:50%;
+  margin-top: 2em;
+  margin: auto;
 }
 
 

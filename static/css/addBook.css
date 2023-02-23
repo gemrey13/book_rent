@@ -1,0 +1,38 @@
+.form-container {
+	background: rgba(0, 0, 0, 0.4);
+	width: 50%;
+	margin: auto;
+	margin-top: 2em;
+}
+
+.form-add-book {
+	width: 80%;
+	padding: 3em;
+}
+
+.form-label {
+	color: #fff;
+	font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.form-control {
+	width: 100%;
+    position: relative;
+    z-index: 100;
+    background: #333;
+	border-radius: 4px;
+    border: none;
+    opacity: 1;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.form-control:focus {
+	background: rgba(0, 0, 0, 0.4);
+	color: #fff;
+}
+
+#image {
+	color: #fff;
+}

@@ -66,6 +66,19 @@
 
 
 
+
+	function randomImage() {
+		$dir = 'media/';
+		$ext = array('jpg', 'jpeg', 'png');
+		$files = glob('media/*.{'.implode(',',$ext). '}', GLOB_BRACE);
+		$randomFile = $files[array_rand($files)];
+		echo $randomFile;
+	}
+
+
+
+
+
 	function searchQuery($pdo, $searchTitle){
 		$pattern = '%'.$searchTitle.'%';
 		$sql = 'SELECT * FROM Book_List WHERE title LIKE :pattern OR author LIKE :pattern ORDER BY Book_List.bookID DESC';
@@ -123,7 +136,7 @@
 			<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>
 			<h1 style="color:red; text-align:center; margin-top:2em;  margin-bottom:20%;">Posts a Blog to view</h1>';
 		} else {
-			echo '<h2>Posts</h2>
+			echo '
 			<a href="addBook.php" class="blog-post_cta" id="addPost">Add Post</a>';
 
 			foreach ($rows as $row) {
@@ -171,6 +184,9 @@
 				session_start();
 				$_SESSION['logged_in'] = true;
 				$_SESSION['username'] = $username;
+				$_SESSION['upass'] = $user['upass'];
+				$_SESSION['firstname'] = $user['firstname'];
+				$_SESSION['lastname'] = $user['lastname'];
 				header('Location: index.php');
 			}else {
 				echo '<script> alert("Invalid username or password") </script>';
@@ -235,7 +251,7 @@
     	$statement = $pdo->query($sql);
     	$row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    	echo '<select name="options">';
+    	echo '<select name="options" id="categories">';
     	foreach ($row as $r) {
     		echo '<option value="'.$r['categoryID'].'">'
     		.$r['name'] .'
