@@ -7,7 +7,7 @@
     if (!isset($_SESSION['username'])) {
         header('Location: landing.php');
         exit();
-    }else if($_SESSION['username'] == 'admin'){
+    }else if($_SESSION['username'] == 'Admin'){
       
     }
     else{

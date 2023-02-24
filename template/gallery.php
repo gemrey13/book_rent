@@ -16,7 +16,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book Renter</title>
+    <title>Rebook</title>
     <link href="../static/css/index.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300i,400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
                 <a href="gallery.php">Gallery</a>
                 
                 <?php
-                  if ($_SESSION['username'] == 'admin') {
+                  if ($_SESSION['username'] == 'Admin') {
                     echo "<a href='admin.php'>Admin</a>";
                   }
                 ?>

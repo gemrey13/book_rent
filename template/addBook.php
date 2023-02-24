@@ -35,7 +35,7 @@
                 <a href="gallery.php">Gallery</a>
                 
                 <?php
-                  if ($_SESSION['username'] == 'admin') {
+                  if ($_SESSION['username'] == 'Admin') {
                     echo "<a href='admin.php'>Admin</a>";
                   }
                 ?>

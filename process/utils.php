@@ -223,10 +223,9 @@
 		$statement = $pdo->query($sql);
 		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-		if ($rows < 0) {
-			echo '
-			<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>
-			<h1 style="color:red; text-align:center; margin-top:2em;  margin-bottom:20%;">Posts a Blog to view</h1>';
+		if (count($rows) <= 0) {
+			echo '<h1 class="noResult">No books</h1>';
+			echo '<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>';
 		} else {
 			echo '
 			<a href="addBook.php" class="blog-post_cta" id="addPost">Add Post</a>';

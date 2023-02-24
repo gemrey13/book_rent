@@ -7,7 +7,7 @@
     if (!isset($_SESSION['username'])) {
         header('Location: landing.php');
         exit();
-    }else if($_SESSION['username'] !== 'admin'){
+    }else if($_SESSION['username'] !== 'Admin'){
       echo "<script> alert('Not admin User')</script>";
       header('Location: blog.php');
     }
@@ -60,14 +60,14 @@
                 <a href="gallery.php">Gallery</a>
 
                 <?php
-                  if ($_SESSION['username'] == 'admin') {
+                  if ($_SESSION['username'] == 'Admin') {
                     echo "<a href='admin.php'>Admin</a>";
                   }
                 ?>
                 <a href="logout.php">Logout</a>
             </div>
             <div>
-            <form class="wrap" method="GET" >
+            <form class="wrap" method="GET" action="blog.php">
                 <div class="search">
                 <input type="text" name="searchTitle" class="searchTerm" placeholder="Search">
                 <button type="submit" name="searchBtn" class="searchButton"><img src="../static/img/magnify.svg"></button>
