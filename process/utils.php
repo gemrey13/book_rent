@@ -69,6 +69,92 @@
 		checkUser($pdo, $username, $upass);
 	};
 
+	if (isset($_GET['trn']) && $_GET['trn']=='DELETE'){
+		$userID = $_GET['userID'];
+        deleteUser($pdo,$userID);
+        unset($_GET['trn']);
+        unset($_GET['userID']);
+        echo '<script>window.location="admin.php"</script>';
+	}
+
+
+
+
+	function populateUser($pdo) {
+		
+			$sql = 'SELECT * FROM User_List';
+			$statement = $pdo->query($sql);
+			$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+			foreach ($rows as $row) {
+				$userID = $row['userID'];
+				echo '<tr class="active-row">
+					<td>'.$row['userID'].'</td>
+					<td>'.$row['username'].'</td>
+					<td>'.$row['firstname'].'</td>
+					<td>'.$row['lastname'].'</td>
+					<td>
+						<a href="javascript:UpdateUser('."'$userID'".');" data-toggle="tooltip" title="Update">
+                                <button type="button" class="btn btn-primary">Update</button>
+                        </a>
+                        <a href="javascript:DeleteUser('."'$userID'".');" data-toggle="tooltip" title="Delete">
+                            <button type="button" class="btn btn-primary">Delete</button>
+                        </a>
+					</td>
+					</tr>
+					';
+			
+		}
+	}
+
+
+	function deleteUser($pdo, $userID) {
+		$sql = 'DELETE FROM User_List WHERE userID=:userID';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':userID',$userID);
+        $statement->execute();
+        echo '<script>alert("User deleted successfully")</script>';
+        $pdo = null;
+        $sql = null;
+	}
+
+
+	function updateUser($pdo, $userID ,$username, $firstname, $lastname) {
+		$sql = 'UPDATE User_List SET username=:username, firstname=:firstname, lastname=:lastname WHERE userID=:userID';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':userID',$userID);
+		$statement->bindValue(':username', $username);
+		$statement->bindValue(':firstname', $firstname);
+		$statement->bindValue(':lastname', $lastname);
+		$statement->execute();
+		
+		echo '<script>alert("Update Succesfully");
+        window.location.assign("admin.php")
+        </script>';
+        $pdo = null;
+        $sql = null;
+	}
+
+	function getUserInfo($pdo, $userID) {
+		$sql = 'SELECT * FROM User_List WHERE userID = :userID';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':userID', $userID);
+		$statement->execute();
+
+		$row = $statement->fetch(PDO::FETCH_ASSOC);
+		$userID = $row['userID'];
+		$username = $row['username'];
+		$firstname = $row['firstname'];
+		$lastname = $row['lastname'];
+		$upass = $row['upass'];
+
+		return ['userID'=>$userID,'username'=>$username, 'firstname'=>$firstname, 'lastname'=>$lastname, 'upass'=>$upass];
+
+        $pdo = null;
+        $sql = null;
+            
+	}
+
 
 
 
@@ -155,7 +241,7 @@
 
 						<div class="blog-post_info">
 							<div class="blog-post_date">
-								<span>'.$row['author'].'</span>
+								<span>Author: '.$row['author'].'</span>
 								<span>'.$row['date_posted'].'</span>
 							</div>
 							<h1 class="blog-post_title">'.$row['title'].'</h1>

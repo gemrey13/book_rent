@@ -34,6 +34,12 @@
             <div class="nav-item">
                 <a href="blog.php">Home</a>
                 <a href="gallery.php">Gallery</a>
+                
+                <?php
+                  if ($_SESSION['username'] == 'admin') {
+                    echo "<a href='admin.php'>Admin</a>";
+                  }
+                ?>
                 <a href="logout.php">Logout</a>
             </div>
             <div>
