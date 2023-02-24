@@ -16,7 +16,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book Renter</title>
+    <title>Rebook</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link href="../static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/css/addBook.css">
@@ -33,6 +33,7 @@
             <div class="nav-item">
                 <a href="blog.php">Home</a>
                 <a href="gallery.php">Gallery</a>
+                <a href="myPosts.php">My Post</a>
                 
                 <?php
                   if ($_SESSION['username'] == 'Admin') {
@@ -94,17 +95,25 @@
         <label class="form-label" for="categories">Select a Category</label>
         <?php
         showCategories($pdo);
-        ?>
+        ?>  
       </div>
+      
 
       <!-- Submit button -->
       <button type="submit" class="btn btn-primary btn-block mb-4" name="addBookBtn">Add a book</button>
     </form>
+
+    <form method="post" action="#">
+        <input type="text" name="category" class="form-label" placeholder="Add Category" style="color:black;">
+        <button type="submit" name="addCategoryBtn">Save</button>
+      </form>
   </div>
 </div>
 
+
+
 <?php
-if(isset($_GET['searchBtn'])) {
+  if(isset($_GET['searchBtn'])) {
       searchQuery($pdo, $_GET['searchTitle']);
     }
   ?>

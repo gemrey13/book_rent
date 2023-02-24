@@ -21,13 +21,18 @@
     }
 
     if (isset($_POST['updateUserBtn'])) {
+
         $username = $_POST['username'];
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
-        
-        updateUser($pdo, $userID, $username, $firstname, $lastname);
+        $upass1 = $_POST['upass1'];
+        $upass2 = $_POST['upass2'];
+        if($upass1 === $upass2) {
+            $upass = $upass1;
+            updateUser($pdo, $userID, $username, $firstname, $lastname, $upass);
         }
-        
+    }
+
 ?>
 
 
@@ -66,16 +71,42 @@
                 <label for="floatingInput" class="login__group__label">Username</label>
             </div>
 
+            <div class="login__group">
+                <input type="password" name="upass1" class="login__group__input password1" id="floatingInput" placeholder="Password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{2,}" title="Must contain at  and one uppercase and lowercase letter, and at least 8 or more characters" value="<?php if (isset($_GET['trn']) && $_GET['trn']=='UPDATE'){ echo $upass;} ?>">
+                <label for="floatingInput" class="login__group__label">Password</label>
+            </div>
+            <div class="login__group">
+                <input type="password" name="upass2" class="login__group__input password2" id="floatingInput" placeholder="Confirm Password" required>
+                <label for="floatingInput" class="login__group__label">Password</label>
+            </div>
+               <input type="checkbox" class="check"  onclick="showPass()" style="width:13px;height:13px;margin: 0 5px;"><span style="color:white;">Show Password</span>
+
+
             <button class="login__sign-in" type="submit" name="updateUserBtn">Save</button>
 
             <p style="text-align: center; color: white;">&copy; All rights reserved 2023</p>
         </form>
     </div>
 
+
+
+<script type="text/javascript">
+     function showPass() {
+         let box1 = document.querySelector('.password1')
+         let box2 = document.querySelector('.password2')
+         if (box1.type === 'password') {
+            box1.type = 'text';
+            box2.type = 'text';
+
+         }else {
+            box1.type = 'password';
+            box2.type = 'password';
+         }
+     }
+
+
+</script>
     
 </body>
-
-
-
-
+        
 </html>

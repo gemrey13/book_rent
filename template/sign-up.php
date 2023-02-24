@@ -48,7 +48,7 @@
                 <label for="floatingInput" class="login__group__label">Password</label>
             </div>
             <div class="login__group">
-                <input type="password" name="upass2" class="login__group__input password2" id="floatingInput" placeholder="Password" required>
+                <input type="password" name="upass2" class="login__group__input password2" id="floatingInput" placeholder="Confirm Password" required>
                 <label for="floatingInput" class="login__group__label">Password</label>
             </div>
                <input type="checkbox" class="check"  onclick="showPass()" style="width:13px;height:13px;margin: 0 5px;"><span style="color:white;">Show Password</span>

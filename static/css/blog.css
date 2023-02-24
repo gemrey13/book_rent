@@ -118,6 +118,13 @@ h2 {
 	left: 45%;
 	top: 25%;
 }
+
+
+#myPost{
+    position: absolute;
+    left: 45%;
+    top: 10%;
+}
 @media screen and (max-width: 1068px) {
     .blog-post {
         max-width: 80rem;

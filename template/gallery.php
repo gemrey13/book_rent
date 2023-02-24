@@ -33,7 +33,8 @@
         <div class="nav-right">
             <div class="nav-item">
                 <a href="blog.php">Home</a>
-                <a href="gallery.php">Gallery</a>
+                <a href="gallery.php" style="color:blue;">Gallery</a>
+                <a href="myPosts.php">My Post</a>
                 
                 <?php
                   if ($_SESSION['username'] == 'Admin') {

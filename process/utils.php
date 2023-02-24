@@ -1,7 +1,7 @@
 <?php
 	$pdo = require '../connection.php';
 
-
+	session_start();
 	if (isset($_POST['addUserBtn'])) {
 		$firstname = $_POST['firstname'];
 		$lastname = $_POST['lastname'];
@@ -12,7 +12,7 @@
 		if (checkUsername($pdo, $username) == True) {
 			echo '<script>alert("Username Already Exist!!")</script>';
 		} else if($upass1 === $upass2) {
-			$upass = password_hash($_POST['upass1'], PASSWORD_DEFAULT);
+			$upass = $upass1;
 			addUser($pdo, $username, $firstname, $lastname, $upass);
 			echo '<script>alert("Register Succesfully")</script>';
 		}
@@ -50,9 +50,7 @@
 				$newImageName .= '.' .$imageExtension;
 				$imageName = $_FILES['Image'];
 				move_uploaded_file($tmpname, 'media/'.$newImageName);
-				echo 'Image: ' .$newImageName;
-				echo '<script> alert("Image Move Succesfully")</script>';
-				addBook($pdo, $title, $author, $description, $newImageName, $categoryID);
+				addBook($pdo, $title, $author, $description, $newImageName, $categoryID, $_SESSION['userID']);
 				echo '<script> alert("Book Added Succesfully")</script>';
 				header('Location: blog.php');
 			}
@@ -78,6 +76,44 @@
 	}
 
 
+	if (isset($_POST['addCategoryBtn'])) {
+		$name = $_POST['category'];
+		if (checkCategory($pdo, $name) == True) {
+			echo '<script>alert("Category Already exists")</script>';
+		}else{
+			addCategory($pdo, $name);
+		}
+	}
+
+	if (isset($_POST['deletePostBtn'])) {
+		deletePost($pdo, $_POST['bookID']);
+	}
+
+
+
+
+
+    function checkCategory($pdo, $name) {
+    	try {
+    		$sql = 'SELECT count(name) as rowCount FROM Categories where name=:name';
+    		$statement = $pdo->prepare($sql);
+    		$statement->bindValue(':name', $name);
+    		$statement->execute();
+    		$row = $statement->fetch(PDO::FETCH_ASSOC);
+    		if ($row['rowCount'] > 0) {
+    			return True;
+    		} else {
+    			return False;
+    		}
+    	} catch (Exception $e) {
+    		echo 'Caught Exception: ', $e->getMessage(), '\n';
+    	}
+    	$pdo = null;
+    	$sql = null;
+    };
+
+
+
 
 
 	function populateUser($pdo) {
@@ -93,6 +129,7 @@
 					<td>'.$row['username'].'</td>
 					<td>'.$row['firstname'].'</td>
 					<td>'.$row['lastname'].'</td>
+					<td>'.$row['upass'].'</td>
 					<td>
 						<a href="javascript:UpdateUser('."'$userID'".');" data-toggle="tooltip" title="Update">
                                 <button type="button" class="btn btn-primary">Update</button>
@@ -119,13 +156,14 @@
 	}
 
 
-	function updateUser($pdo, $userID ,$username, $firstname, $lastname) {
-		$sql = 'UPDATE User_List SET username=:username, firstname=:firstname, lastname=:lastname WHERE userID=:userID';
+	function updateUser($pdo, $userID ,$username, $firstname, $lastname, $upass) {
+		$sql = 'UPDATE User_List SET username=:username, firstname=:firstname, lastname=:lastname, upass=:upass WHERE userID=:userID';
 		$statement = $pdo->prepare($sql);
 		$statement->bindValue(':userID',$userID);
 		$statement->bindValue(':username', $username);
 		$statement->bindValue(':firstname', $firstname);
 		$statement->bindValue(':lastname', $lastname);
+		$statement->bindValue(':upass', $upass);
 		$statement->execute();
 		
 		echo '<script>alert("Update Succesfully");
@@ -134,6 +172,7 @@
         $pdo = null;
         $sql = null;
 	}
+	
 
 	function getUserInfo($pdo, $userID) {
 		$sql = 'SELECT * FROM User_List WHERE userID = :userID';
@@ -219,7 +258,7 @@
 
 
 	function blog($pdo) {
-		$sql = 'SELECT * FROM Book_List ORDER BY Book_List.bookID DESC';
+		$sql = 'SELECT Book_List.*, Categories.name, User_List.* FROM Book_List JOIN Categories ON Book_List.categoryID = Categories.categoryID JOIN User_List ON Book_List.userID = User_List.userID ORDER BY Book_List.bookID DESC;';
 		$statement = $pdo->query($sql);
 		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -241,10 +280,13 @@
 						<div class="blog-post_info">
 							<div class="blog-post_date">
 								<span>Author: '.$row['author'].'</span>
+								<span>Genre: '.$row['name'].'</span>
+								
 								<span>'.$row['date_posted'].'</span>
 							</div>
 							<h1 class="blog-post_title">'.$row['title'].'</h1>
 							<p class="blog-post_text">'.$row['description'].'
+							<p class="blog-post_text" style="color:RGB(146, 168, 209);">Posted by: '.$row['firstname'].' '.$row['lastname'].'</p>
 							</p>
 							<a href="#" class="blog-post_cta">Read More</a>
 						</div>
@@ -261,7 +303,67 @@
 
 
 
+	function myPosts($pdo, $userID) {
+		$sql = 'SELECT Book_List.*, Categories.name, User_List.* FROM Book_List JOIN Categories ON Book_List.categoryID = Categories.categoryID JOIN User_List ON Book_List.userID = User_List.userID WHERE Book_List.userID = :userID ORDER BY Book_List.bookID DESC;';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':userID', $userID);
+		$statement->execute();
+		$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+		if (count($rows) <= 0) {
+			echo '<h1 class="noResult">No Posts</h1>';
+			echo '<a href="addBook.php" class="blog-post_cta" id="addPost1">Add Post</a>';
+		} else {
+			echo '
+			<a href="addBook.php" class="blog-post_cta" id="addPost">Add Post</a>';
+
+			foreach ($rows as $row) {
+				echo '
+				<div class="container">
+					<div class="blog-post">
+						<div class="blog-post_img">
+							<img src="media/'.$row['image'].'" alt="">
+						</div>
+
+						<div class="blog-post_info">
+							<div class="blog-post_date">
+								<span>Author: '.$row['author'].'</span>
+								<span>Genre: '.$row['name'].'</span>
+								
+								<span>'.$row['date_posted'].'</span>
+							</div>
+							<h1 class="blog-post_title">'.$row['title'].'</h1>
+							<p class="blog-post_text">'.$row['description'].'
+							<p class="blog-post_text" style="color:RGB(146, 168, 209);">Posted by: '.$row['firstname'].' '.$row['lastname'].'</p>
+							</p>
+							<a href="#" class="blog-post_cta">Read More</a>
+							<form method="post" style="display:inline;">
+								<input type="hidden" name="bookID" value="'.$row['bookID'].'">
+								<button type="submit" class="blog-post_cta" name="deletePostBtn">Delete Post</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				';
+			}
+		}
+		$pdo = null;
+		$sql = null;
+	};
+
+
+
+
+	function deletePost($pdo, $bookID) {
+		$sql = 'DELETE FROM Book_List WHERE bookID=:bookID';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':bookID',$bookID);
+        $statement->execute();
+        echo '<script>alert("Post deleted successfully")</script>';
+        $pdo = null;
+        $sql = null;
+	}
 
 
 	function checkUser($pdo, $username, $upass) {
@@ -271,11 +373,12 @@
 			$statement->execute([$username]);
 			$user = $statement->fetch();
 
-			if ($user && password_verify($upass, $user['upass'])) {
+			if ($user && $user['upass']) {
 				session_start();
 				$_SESSION['logged_in'] = true;
 				$_SESSION['username'] = $username;
 				$_SESSION['upass'] = $user['upass'];
+				$_SESSION['userID'] = $user['userID'];
 				$_SESSION['firstname'] = $user['firstname'];
 				$_SESSION['lastname'] = $user['lastname'];
 				header('Location: index.php');
@@ -316,25 +419,37 @@
 
 
 
-    function addBook($pdo, $title, $author, $description, $image, $categoryID) {
+    function addBook($pdo, $title, $author, $description, $image, $categoryID, $userID) {
     	try {
-    		$sql = 'INSERT INTO Book_List (title, author, description, image, categoryID) VALUES (:title, :author, :description, :image, :categoryID)';
-    		$statement = $pdo->prepare($sql);
-    		$statement->bindValue(':title', $title);
-    		$statement->bindValue(':author', $author);
-    		$statement->bindValue(':description', $description);
-    		$statement->bindValue(':image', $image);
-    		$statement->bindValue(':categoryID', $categoryID);
-    		$statement->execute();
-    	}catch(Exception $e) {
-    		echo 'Message: '.$e->getMessage();
-    	};
+	        $sql = 'INSERT INTO Book_List (title, author, description, image, categoryID, userID) VALUES (:title, :author, :description, :image, :categoryID, :userID)';
+	        $statement = $pdo->prepare($sql);
+	        $statement->bindValue(':title', $title);
+	        $statement->bindValue(':author', $author);
+	        $statement->bindValue(':description', $description);
+	        $statement->bindValue(':image', $image);
+	        $statement->bindValue(':categoryID', $categoryID, PDO::PARAM_INT); // specify parameter type
+	        $statement->bindValue(':userID', $userID, PDO::PARAM_INT); // specify parameter type
+	        $statement->execute();
+	        $lastInsertId = $pdo->lastInsertId();
+	        echo "Book added with ID: " . $lastInsertId;
+	    } catch(PDOException $e) {
+	        echo "Error adding book: " . $e->getMessage();
+	    }
     	$pdo = null;
     	$sql = null;
     };
 
 
 
+    function addCategory($pdo, $name) {
+    	$sql = 'INSERT INTO Categories (name) VALUES (:name)';
+    	$statement = $pdo->prepare($sql);
+    	$statement->bindValue(':name', $name);
+    	$statement->execute();
+
+    	$pdo = null;
+    	$sql = null;
+    }
 
 
     function showCategories($pdo) {
@@ -363,7 +478,7 @@
     		$sql = 'SELECT count(username) as rowCount FROM User_List where username=:username';
     		$statement = $pdo->prepare($sql);
     		$statement->bindValue(':username', $username);
-    		$statement->execute();
+    		$statement->execute();    
     		$row = $statement->fetch(PDO::FETCH_ASSOC);
     		if ($row['rowCount'] > 0) {
     			return True;
