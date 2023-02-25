@@ -104,7 +104,7 @@
     </form>
 
     <form method="post" action="#">
-        <input type="text" name="category" class="form-label" placeholder="Add Category" style="color:black;">
+        <input type="text" name="category" class="form-label" placeholder="Add Category" style="color:black;" required>
         <button type="submit" name="addCategoryBtn">Save</button>
       </form>
   </div>

@@ -64,22 +64,19 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Jessica Felicio" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Jessica Felicio</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" class="gallery__image">
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" alt="Portrait by Oladimeji Odunsi" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Oladimeji Odunsi</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;"  class="gallery__image">
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Alex Perez" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Alex Perez</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" class="gallery__image">
                 </figure>
             </a>
         </div>
@@ -87,22 +84,19 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;"  alt="Portrait by Noah Buscher" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Noah Buscher</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" class="gallery__image">
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Ivana Cajina" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Ivana Cajina</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;"  class="gallery__image">
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;"  alt="Portrait by Sam Burriss" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Sam Burriss</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;"  class="gallery__image">
                 </figure>
             </a>
         </div>
@@ -110,22 +104,19 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" alt="Portrait by Mari Lezhava" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Mari Lezhava</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" class="gallery__image">
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Ethan Haddox" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Ethan Haddox</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" class="gallery__image">
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Amir Geshani" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Amir Geshani</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" class="gallery__image">
                 </figure>
             </a>
         </div>
@@ -133,22 +124,21 @@
         <div class="gallery__column">
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Guilian Fremaux" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Guilian Fremaux</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" class="gallery__image">
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;" alt="Portrait by Jasmin Chew" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Jasmin Chew</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="300" style="object-fit: contain;"  class="gallery__image">
+                   
                 </figure>
             </a>
 
             <a href="" class="gallery__link">
                 <figure class="gallery__thumb">
-                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" alt="Portrait by Dima DallAcqua" class="gallery__image">
-                    <figcaption class="gallery__caption">Portrait by Dima DallAcqua</figcaption>
+                    <img src="<?php randomImage()?>" width="300" height="500" style="object-fit: contain;" class="gallery__image">
+                    
                 </figure>
             </a>
         </div>

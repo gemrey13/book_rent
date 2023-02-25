@@ -3,8 +3,8 @@
 
 	session_start();
 	if (isset($_POST['addUserBtn'])) {
-		$firstname = $_POST['firstname'];
-		$lastname = $_POST['lastname'];
+		$firstname = ucwords($_POST['firstname']);
+		$lastname = ucwords($_POST['lastname']);
 		$username = $_POST['username'];
 		$upass1 = $_POST['upass1'];
 		$upass2 = $_POST['upass2'];
@@ -26,8 +26,8 @@
 
 
 	if (isset($_POST['addBookBtn'])) {
-		$title = $_POST['title'];
-		$author = $_POST['author'];
+		$title = ucwords($_POST['title']);
+		$author = ucwords($_POST['author']);
 		$description = $_POST['description'];
 		$categoryID = $_POST['options'];
 
@@ -83,6 +83,7 @@
 
 	if (isset($_POST['addCategoryBtn'])) {
 		$name = $_POST['category'];
+		$name = ucwords($name);
 		if (checkCategory($pdo, $name) == True) {
 			echo '<script>alert("Category Already exists")</script>';
 		}else{
@@ -299,7 +300,16 @@
 
 	function searchQuery($pdo, $searchTitle){
 		$pattern = '%'.$searchTitle.'%';
-		$sql = 'SELECT * FROM Book_List WHERE title LIKE :pattern OR author LIKE :pattern ORDER BY Book_List.bookID DESC';
+		$sql = 'SELECT Book_List.*, Categories.name, User_List.*
+		FROM (
+		    SELECT *
+		    FROM Book_List
+		    WHERE title LIKE :pattern OR author LIKE :pattern
+		    ORDER BY bookID DESC
+		) AS Book_List
+		JOIN Categories ON Book_List.categoryID = Categories.categoryID
+		JOIN User_List ON Book_List.userID = User_List.userID
+		ORDER BY Book_List.bookID DESC;';
 		$statement = $pdo->prepare($sql);
 		$statement->bindValue(':pattern', $pattern);
 		$statement->execute();
@@ -312,26 +322,28 @@
 			echo '<a href="addBook.php" class="blog-post_cta" id="addPost">Add Post</a>';
 			foreach ($rows as $row) {
 				echo '
-						<div class="container">
-							<div class="blog-post">
-								<div class="blog-post_img">
-									<img src="media/'.$row['image'].'" alt="">
-								</div>
-
-								<div class="blog-post_info">
-									<div class="blog-post_date">
-										<span>'.$row['author'].'</span>
-										<span>'.$row['date_posted'].'</span>
-									</div>
-									<h1 class="blog-post_title">'.$row['title'].'</h1>
-									<p class="blog-post_text">'.$row['description'].'
-									</p>
-									<a href="#" class="blog-post_cta">Read More</a>
-								</div>
-							</div>
+				<div class="container">
+					<div class="blog-post">
+						<div class="blog-post_img">
+							<img src="media/'.$row['image'].'" alt="">
 						</div>
 
-						';
+						<div class="blog-post_info">
+							<div class="blog-post_date">
+								<span>Author: '.$row['author'].'</span>
+								<span>Genre: '.$row['name'].'</span>
+								<span>'.$row['date_posted'].'</span>
+							</div>
+							<h1 class="blog-post_title">'.$row['title'].'</h1>
+							<p class="blog-post_text">'.$row['description'].'
+							<p class="blog-post_text" style="color:RGB(146, 168, 209);">Posted by: '.$row['firstname'].' '.$row['lastname'].'</p>
+							</p>
+							<a href="#" class="blog-post_cta">Read More</a>
+						</div>
+					</div>
+				</div>
+
+				';
 			}
 		}
         $pdo = null;
