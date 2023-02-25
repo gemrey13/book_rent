@@ -32,6 +32,7 @@
 
 <script>
     function DeleteUser(userID){
+        alert("WARNING: If you delete User \n the user posts will also be deleted");
         let ans=confirm("Are you sure you want to delete the User Information?")
         if(ans){
           window.location="admin.php?userID="+userID+"&trn=DELETE";

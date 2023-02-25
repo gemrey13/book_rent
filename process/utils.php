@@ -69,11 +69,11 @@
 
 	if (isset($_GET['trn']) && $_GET['trn']=='DELETE'){
 		$userID = $_GET['userID'];
-        deleteUser($pdo,$userID);
+        deleteUser($pdo, $userID);
         unset($_GET['trn']);
         unset($_GET['userID']);
-        echo '<script>window.location="admin.php"</script>';
-	}
+        //echo '<script>window.location="admin.php"</script>';
+	}	
 
 
 	if (isset($_POST['addCategoryBtn'])) {
@@ -140,17 +140,26 @@
 					</td>
 					</tr>
 					';
-			
 		}
 	}
 
 
 	function deleteUser($pdo, $userID) {
-		$sql = 'DELETE FROM User_List WHERE userID=:userID';
-		$statement = $pdo->prepare($sql);
-		$statement->bindValue(':userID',$userID);
-        $statement->execute();
-        echo '<script>alert("User deleted successfully")</script>';
+		try{
+
+			$sql = "DELETE FROM Book_List WHERE userID = :userID";
+			$statement = $pdo->prepare($sql);
+			$statement->bindValue(':userID', $userID);
+			$statement->execute();
+
+			$sql = 'DELETE FROM User_List WHERE userID=:userID';
+			$statement = $pdo->prepare($sql);
+			$statement->bindValue(':userID', $userID);
+	        $statement->execute();
+	        echo '<script>alert("User deleted successfully")</script>';
+    	}catch(Exception $e){
+    		echo 'Message: '.$e->getMessage();
+    	}
         $pdo = null;
         $sql = null;
 	}
@@ -172,7 +181,7 @@
         $pdo = null;
         $sql = null;
 	}
-	
+
 
 	function getUserInfo($pdo, $userID) {
 		$sql = 'SELECT * FROM User_List WHERE userID = :userID';

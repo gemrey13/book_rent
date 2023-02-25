@@ -55,7 +55,7 @@
 
             <button class="login__sign-in" type="submit" name="addUserBtn">Signup</button>
 
-            <p style="color:white; margin: auto;">Have an acoount? Click <a href="login.php"> Here</a></p>
+            <p style="color:white; margin: auto;">Already have an acoount? Click <a href="login.php"> Here</a></p>
             <p style="text-align: center; color: white;">&copy; All rights reserved 2023</p>
         </form>
     </div>

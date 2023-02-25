@@ -31,8 +31,8 @@
           <img src="../static/img/rebook.png" width="70" height="70" class="d-inline-block align-top" alt="Rebook logo" style="position: relative; left: 0.5em; top: 0em;">
         ebook</a>
         <div class="d-flex">
-          <a href="login.php" class="btn-danger btn top-sign-in" style="background-color: Blue; margin-right: 2em;">Login</a>
-          <a href="sign-up.php" class="btn-danger btn top-sign-in">Register</a>
+          <a href="login.php" class="btn-danger btn top-sign-in" style="background-color: black;color: red; margin-right: 2em; font-weight:bold;">Login</a>
+          <a href="sign-up.php" class="btn-danger btn top-sign-in" style="background-color: black;color: red; margin-right: 2em; font-weight: bold;">Register</a>
         </div>
       </div>
     </nav>
