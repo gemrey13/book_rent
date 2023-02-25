@@ -438,6 +438,17 @@
 
 
 	function deletePost($pdo, $bookID) {
+		$sql = 'SELECT image FROM Book_List WHERE bookID=:bookID';
+		$statement = $pdo->prepare($sql);
+		$statement->bindValue(':bookID', $bookID);
+		$statement->execute();
+		$result = $statement->fetch(PDO::FETCH_ASSOC);
+		$imageFilePath = $result['image'];
+		$path = 'media/'.$imageFilePath;
+
+
+		unlink($path);
+
 		$sql = 'DELETE FROM Book_List WHERE bookID=:bookID';
 		$statement = $pdo->prepare($sql);
 		$statement->bindValue(':bookID',$bookID);
