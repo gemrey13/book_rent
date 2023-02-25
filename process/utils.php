@@ -73,7 +73,12 @@
         unset($_GET['trn']);
         unset($_GET['userID']);
         //echo '<script>window.location="admin.php"</script>';
-	}	
+	}elseif(isset($_GET['trn']) && $_GET['trn'] == 'DELETEBOOK') {
+		$bookID = $_GET['bookID'];
+		deleteBook($pdo, $bookID);
+		unset($_GET['trn']);
+        unset($_GET['userID']);
+	}
 
 
 	if (isset($_POST['addCategoryBtn'])) {
@@ -142,6 +147,60 @@
 					';
 		}
 	}
+
+
+	function populateBook($pdo) {
+		
+			$sql = 'SELECT Book_List.*, Categories.name, User_List.* FROM Book_List JOIN Categories ON Book_List.categoryID = Categories.categoryID JOIN User_List ON Book_List.userID = User_List.userID ORDER BY Book_List.bookID DESC;';
+			$statement = $pdo->query($sql);
+			$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+			foreach ($rows as $row) {
+				$bookID = $row['bookID'];
+				echo '<tr class="active-row">
+					<td>'.$row['bookID'].'</td>
+					<td>'.$row['userID'].'</td>
+					<td>'.$row['title'].'</td>
+					<td>'.$row['author'].'</td>
+					<td>'.$row['name'].'</td>
+					<td>'.$row['username'].'</td>
+					<td>'.$row['firstname'].'</td>
+					<td>'.$row['lastname'].'</td>
+					<td>
+						<a href="javascript:UpdateUser('."'$bookID'".');" data-toggle="tooltip" title="Update">
+                                <button type="button" class="btn btn-primary">Update</button>
+                        </a>
+                        <a href="javascript:DeleteBook('."'$bookID'".');" data-toggle="tooltip" title="Delete">
+                            <button type="button" class="btn btn-primary">Delete</button>
+                        </a>
+					</td>
+					</tr>
+					';
+		}
+	}
+
+
+
+	function deleteBook($pdo, $bookID) {
+		try{
+			$sql = 'DELETE FROM Book_List WHERE bookID=:bookID';
+			$statement = $pdo->prepare($sql);
+			$statement->bindValue(':bookID', $bookID);
+			$statement->execute();
+	        echo '<script>alert("Book deleted successfully");
+	        	location.reload();
+	        </script>';
+	        header('Location: admin.php');
+
+    	}catch(Exception $e){
+    		echo 'Message: '.$e->getMessage();
+    	}
+        $pdo = null;
+        $sql = null;
+	}
+
+
+
 
 
 	function deleteUser($pdo, $userID) {

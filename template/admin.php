@@ -39,6 +39,13 @@
         }
       }
 
+      function DeleteBook(bookID){
+        let ans=confirm("Are you sure you want to delete the Book?")
+        if(ans){
+          window.location="admin.php?bookID="+bookID+"&trn=DELETEBOOK";
+        }
+      }
+
 
     function UpdateUser(userID){
         let ans=confirm("Are you sure you want to edit the user information?")
@@ -46,6 +53,11 @@
           window.location="editUser.php?userID="+userID+"&trn=UPDATE";
         }
       }
+
+      if (!sessionStorage.getItem('reloaded')) {
+      sessionStorage.setItem('reloaded', 'true');
+      location.reload();
+    }
 
 </script>
 
@@ -79,23 +91,56 @@
         </div>
     </nav>
 
-    <table class="styled-table">
-      <thead>
-        <tr>
-            <th>User ID</th>
-            <th>Username</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Password</th>
-            <th>Action</th>
-        </tr>
-      </thead>
+        <form method="post">
+            <input type="hidden" name="Switch">
+            <button type="submit" name="AdminPanelUser">User</button>
+        </form>
+        <form method="post">
+            <input type="hidden" name="Switch">
+            <button type="submit" name="AdminPanelPost">Posts</button>
+        </form>
 
-      <tbody>
-        
-        <?php populateUser($pdo)?>
+
+
+    <table class="styled-table">
+        <?php if(isset($_POST['AdminPanelUser'])){
+            echo "<thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ".populateUser($pdo)."
+                  </tbody>
+                ";
+                unset($_POST['AdminPanel']);
+                }elseif(isset($_POST['AdminPanelPost'])){
+                    echo "<thead>
+                    <tr>
+                        <th>Book ID</th>
+                        <th>User ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Category Name</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ".populateBook($pdo)."
+                  </tbody>
+                ";
+                }
+        ?>
+
       
-      </tbody>
 
     </table>
 
