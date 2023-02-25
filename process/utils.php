@@ -183,10 +183,24 @@
 
 	function deleteBook($pdo, $bookID) {
 		try{
+
+			$sql = 'SELECT image FROM Book_List WHERE bookID=:bookID';
+			$statement = $pdo->prepare($sql);
+		    $statement->bindValue(':bookID', $bookID);
+		    $statement->execute();
+		    $result = $statement->fetch(PDO::FETCH_ASSOC);
+		    $imageFilePath = $result['image'];
+			$path = 'media/'.$imageFilePath;
+
+
+			unlink($path);
+
 			$sql = 'DELETE FROM Book_List WHERE bookID=:bookID';
 			$statement = $pdo->prepare($sql);
 			$statement->bindValue(':bookID', $bookID);
 			$statement->execute();
+
+
 	        echo '<script>alert("Book deleted successfully");
 	        	location.reload();
 	        </script>';

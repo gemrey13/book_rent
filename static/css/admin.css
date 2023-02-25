@@ -1,4 +1,24 @@
 
+.nav-admin {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    font-size: 2.5em;
+    margin: 0.8em 0;
+}
+.nav-admin button {
+
+    background-color: rgba(0, 0, 0, 0.4);
+    border: none;
+    color: white;
+    padding: 0.2em 1em;
+}
+
+.nav-admin button:hover{
+    background-color: rgba(0, 250, 0, 0.8);
+}
+
+
 .styled-table {
     border-collapse: collapse;
     margin: auto;

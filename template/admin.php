@@ -54,11 +54,6 @@
         }
       }
 
-      if (!sessionStorage.getItem('reloaded')) {
-      sessionStorage.setItem('reloaded', 'true');
-      location.reload();
-    }
-
 </script>
 
 <body>
@@ -91,12 +86,8 @@
         </div>
     </nav>
 
-        <form method="post">
-            <input type="hidden" name="Switch">
+        <form method="post" class="nav-admin">
             <button type="submit" name="AdminPanelUser">User</button>
-        </form>
-        <form method="post">
-            <input type="hidden" name="Switch">
             <button type="submit" name="AdminPanelPost">Posts</button>
         </form>
 
