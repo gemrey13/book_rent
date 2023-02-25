@@ -229,7 +229,12 @@
 			$statement = $pdo->prepare($sql);
 			$statement->bindValue(':userID', $userID);
 	        $statement->execute();
-	        echo '<script>alert("User deleted successfully")</script>';
+
+
+	        echo '<script>alert("User deleted successfully");
+	        	location.reload();
+	        </script>';
+	        header('Location: admin.php');
     	}catch(Exception $e){
     		echo 'Message: '.$e->getMessage();
     	}
